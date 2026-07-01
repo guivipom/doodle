@@ -24,7 +24,7 @@ The application will be available at http://localhost:8080.
 ### Create a user
 
 ```bash
-curl -X POST http://localhost:8080/api/users \
+curl -X POST http://localhost:8080/api/users/create \
   -H "Content-Type: application/json" \
   -d '{"name": "Guillermo Vidal", "email": "guillermo@example.com"}'
 ```
@@ -54,7 +54,7 @@ Response: 200 OK
 
 ### Get all users
 ```bash
-curl http://localhost:8080/api/users
+curl http://localhost:8080/api/users/all
 ```
 Response: 200 OK
 [

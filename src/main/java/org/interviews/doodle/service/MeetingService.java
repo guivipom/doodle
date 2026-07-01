@@ -55,12 +55,14 @@ public class MeetingService {
         return mapper.toResponse(meetingRepository.save(meeting));
     }
 
+    @Transactional(readOnly = true)
     public MeetingResponse getMeeting(Long id) {
         return meetingRepository.findById(id)
                 .map(mapper::toResponse)
                 .orElseThrow(() -> new MeetingNotFoundException(id));
     }
 
+    @Transactional(readOnly = true)
     public List<MeetingResponse> getMeetingsByOrganizer(Long organizerId) {
         userRepository.findById(organizerId)
                 .orElseThrow(() -> new UserNotFoundException(organizerId));

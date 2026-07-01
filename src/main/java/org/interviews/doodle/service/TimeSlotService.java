@@ -37,7 +37,7 @@ public class TimeSlotService {
     public TimeSlotResponse getSlot(Long userId, Long slotId) {
         TimeSlot slot = repository.findById(slotId)
                 .orElseThrow(() -> new SlotNotFoundException(slotId));
-        if (slot.getUser().getId() != userId) {
+        if (!slot.getUser().getId().equals(userId)) {
             throw new SlotNotFoundException(slotId);
         }
         return mapper.toResponse(slot);
@@ -54,7 +54,7 @@ public class TimeSlotService {
     public TimeSlotResponse updateSlot(Long userId, Long slotId, TimeSlotRequest request) {
         TimeSlot slot = repository.findById(slotId)
                 .orElseThrow(() -> new SlotNotFoundException(slotId));
-        if (slot.getUser().getId() != userId) {
+        if (!slot.getUser().getId().equals(userId)) {
             throw new SlotNotFoundException(slotId);
         }
         slot.setStartTime(request.startTime());
@@ -67,7 +67,7 @@ public class TimeSlotService {
     public void deleteSlot(Long userId, Long slotId) {
         TimeSlot slot = repository.findById(slotId)
                 .orElseThrow(() -> new SlotNotFoundException(slotId));
-        if (slot.getUser().getId() != userId) {
+        if (!slot.getUser().getId().equals(userId)) {
             throw new SlotNotFoundException(slotId);
         }
         repository.delete(slot);
