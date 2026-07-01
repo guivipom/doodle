@@ -50,7 +50,7 @@ public class TimeSlotMapperTest {
         assertEquals(now, slot.getStartTime());
         assertEquals(now.plusHours(1), slot.getEndTime());
         assertEquals(SlotStatus.BUSY, slot.getStatus());
-        assertEquals(0L, slot.getId());
+        assertNull(slot.getId());
         assertNull(slot.getUser());
         assertNull(slot.getCreatedAt());
     }

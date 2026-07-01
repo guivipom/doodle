@@ -38,7 +38,7 @@ class UserMapperTest {
 
         assertEquals("Guillermo Vidal", user.getName());
         assertEquals("guillermo@example.com", user.getEmail());
-        assertEquals(0L, user.getId());
+        assertNull(user.getId());
         assertNull(user.getCreatedAt());
     }
 

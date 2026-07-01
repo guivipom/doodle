@@ -71,3 +71,56 @@ Response: 200 OK
     "createdAt": "..."
     }
 ]
+
+### Create a slot:
+```bash
+   curl -X POST http://localhost:8080/api/users/1/slots \
+   -H "Content-Type: application/json" \
+   -d '{
+   "startTime": "2026-07-01T09:00:00",
+   "endTime": "2026-07-01T10:00:00",
+   "status": "FREE"
+   }'
+```
+### Get all slots for a user 
+```bash
+   curl http://localhost:8080/api/users/1/slots
+```
+### Get a specific slot:
+```bash
+curl http://localhost:8080/api/users/1/slots/1
+```
+
+### Update a slot:
+```bash
+   curl -X PUT http://localhost:8080/api/users/1/slots/99 \
+   -H "Content-Type: application/json" \
+   -d '{
+   "startTime": "2026-07-02T14:00:00",
+   "endTime": "2026-07-02T15:00:00",
+   "status": "BUSY"
+   }'
+```
+
+### Create a meeting
+# Converts a FREE slot into a meeting. The slot will be marked BUSY automatically.
+```bash
+curl -X POST http://localhost:8080/api/users/1/meetings \
+-H "Content-Type: application/json" \
+-d '{
+"slotId": 1,
+"title": "Title",
+"description": "description",
+"participantIds": [2, 3]
+}'
+```
+
+### Get a meeting by ID
+```bash
+curl http://localhost:8080/api/users/1/meetings/1
+```
+
+### Get all meetings for an organizer
+```bash
+curl http://localhost:8080/api/users/1/meetings
+```
