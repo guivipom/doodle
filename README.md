@@ -19,3 +19,55 @@ docker-compose up --build
 The application will be available at http://localhost:8080.
 - Health Check: http://localhost:8080/actuator/health
 
+## API Endpoints
+
+### Create a user
+
+```bash
+curl -X POST http://localhost:8080/api/users \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Guillermo Vidal", "email": "guillermo@example.com"}'
+```
+
+Response: 201 Created
+
+{
+  "id": 1,
+  "name": "Guillermo Vidal",
+  "email": "guillermo@example.com",
+  "createdAt": "..."
+}
+
+### Get a user by ID
+
+```bash
+curl http://localhost:8080/api/users/1
+```
+
+Response: 200 OK
+{
+  "id": 1,
+  "name": "Guillermo Vidal",
+  "email": "guillermo@example.com",
+  "createdAt": "..."
+}
+
+### Get all users
+```bash
+curl http://localhost:8080/api/users
+```
+Response: 200 OK
+[
+  {
+    "id": 1,
+    "name": "Guillermo Vidal",
+    "email": "guillermo@example.com",
+    "createdAt": "..."
+  },
+    {
+    "id": 2,
+    "name": "Alejandro Vidal",
+    "email": "alejandro@example.com",
+    "createdAt": "..."
+    }
+]
