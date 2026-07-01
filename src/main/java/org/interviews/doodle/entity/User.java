@@ -19,5 +19,6 @@ public class User {
     private long id;
     private String name;
     private String email;
+    @Column(insertable = false, updatable = false)
     private LocalDateTime createdAt;
 }
