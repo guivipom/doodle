@@ -1,5 +1,9 @@
 package org.interviews.doodle.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.interviews.doodle.dto.UserRequest;
 import org.interviews.doodle.dto.UserResponse;
@@ -14,16 +18,27 @@ import java.util.List;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/users")
+@Tag(name = "Users", description = "User management operations")
 public class UserController {
 
     private final UserService service;
 
+    @Operation(summary = "Create a new user")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "User created successfully"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body")
+    })
     @PostMapping("/create")
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
         UserResponse userResponse = service.createUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
     }
 
+    @Operation(summary = "Get a user by id")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "User found"),
+            @ApiResponse(responseCode = "404", description = "User not found")
+    })
     @GetMapping("/{id}")
     public ResponseEntity<?> getUser(@PathVariable Long id) {
         try {
@@ -34,11 +49,11 @@ public class UserController {
         }
     }
 
+    @Operation(summary = "Get all users")
+    @ApiResponse(responseCode = "200", description = "List of users retrieved successfully")
     @GetMapping("/all")
     public ResponseEntity<List<UserResponse>> getAllUsers(){
         return ResponseEntity.ok(service.getAllUsers());
     }
-
-
 
 }

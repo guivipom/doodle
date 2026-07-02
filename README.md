@@ -18,6 +18,8 @@ docker-compose up --build
 ```
 The application will be available at http://localhost:8080.
 - Health Check: http://localhost:8080/actuator/health
+- Swagger UI: http://localhost:8080/swagger-ui.html
+- OpenAPI JSON: http://localhost:8080/v3/api-docs
 
 ## API Endpoints
 
