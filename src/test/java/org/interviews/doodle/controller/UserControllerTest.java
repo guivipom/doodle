@@ -37,7 +37,7 @@ public class UserControllerTest {
 
         when(service.createUser(request)).thenReturn(response);
 
-        mockMvc.perform(post("/api/users/create")
+        mockMvc.perform(post("/api/users")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(request)))
                 .andExpect(status().isCreated())

@@ -28,7 +28,7 @@ public class UserController {
             @ApiResponse(responseCode = "201", description = "User created successfully"),
             @ApiResponse(responseCode = "400", description = "Invalid request body")
     })
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<UserResponse> createUser(@RequestBody UserRequest request) {
         UserResponse userResponse = service.createUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(userResponse);
@@ -51,7 +51,7 @@ public class UserController {
 
     @Operation(summary = "Get all users")
     @ApiResponse(responseCode = "200", description = "List of users retrieved successfully")
-    @GetMapping("/all")
+    @GetMapping
     public ResponseEntity<List<UserResponse>> getAllUsers(){
         return ResponseEntity.ok(service.getAllUsers());
     }
