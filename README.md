@@ -7,7 +7,7 @@ time slots, schedule meetings, and view their custom calendar availability.
 
 ## Tech Stack & Design Decisions
 
-The service is built with **Spring Boot 4 **, **PostgreSQL 17**, and **Spring Data JPA + Hibernate** for persistence. Schema migrations are managed by **Flyway** so the database is always version-controlled and reproducible across environments. **MapStruct** handles DTO mapping at compile time. **springdoc-openapi** auto-generates the Swagger UI directly from the code. **Spring Boot Actuator** exposes health, info, and metrics endpoints out of the box. Tests are written with **JUnit 5 + Mockito** for unit tests and **Testcontainers** for integration tests against a real PostgreSQL instance. The Docker setup uses a **multi-stage build** to keep the final image lean.
+The service is built with **Spring Boot 4**, **PostgreSQL 17**, and **Spring Data JPA + Hibernate** for persistence. Schema migrations are managed by **Flyway**. **MapStruct** handles DTO mapping at compile time. **springdoc-openapi** auto-generates the Swagger UI directly from the code. Tests are written with **JUnit 5 + Mockito** for unit tests and **Testcontainers** for integration tests against a real PostgreSQL instance. The Docker setup uses a **multi-stage build** to keep the final image lean.
 
 The service follows a classic layered architecture (Controller → Service → Repository) to keep concerns separated. All entity relationships use `FetchType.LAZY` with OSIV disabled (`open-in-view: false`) to avoid unnecessary queries and keep transaction boundaries explicit. Database indexes are placed on the most frequent query paths (`user_id`, `organizer_id`, `(user_id, status)`) to support the expected load of hundreds of users with thousands of slots.
 
